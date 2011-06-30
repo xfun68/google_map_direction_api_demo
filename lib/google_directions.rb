@@ -6,7 +6,7 @@ module GoogleDirections
   PATH = "/maps/api/directions/json"
 
   def search_routes(start_address, end_address)
-    params = {:origin => start_address, :destination => end_address, :sensor => "false"}
-    http_get(DOMAIN, PATH, params)
+    query_stirng = {:origin => start_address, :destination => end_address, :sensor => "false"}
+    http_get(DOMAIN, PATH, query_stirng)
   end
 end
