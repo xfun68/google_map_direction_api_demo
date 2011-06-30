@@ -1,11 +1,11 @@
 require 'cucumber/rails'
-require 'webrat'
+
+require "capybara/cucumber"
+require "capybara/session"
 
 Capybara.default_selector = :css
 
-Webrat.configure do |config|
-  config.mode = :selenium
-end
+Capybara.default_driver = :selenium
 
 ActionController::Base.allow_rescue = false
 
