@@ -6,7 +6,7 @@ class Routes
   end
 
   def founded?
-    self.status == "OK"   
+    status == "OK"
   end
 
   def status

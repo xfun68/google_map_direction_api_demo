@@ -34,7 +34,7 @@ describe GoogleDirections do
       @routes["duration"]["value"].should_not be_blank
     end
 
-    it "should return duration" do
+    it "should return steps" do
       @routes["steps"].count.should > 0
     end
   end
