@@ -40,7 +40,7 @@
       <div id='steps'>
         <ol>
           <% @routes.steps.each do |instruction| %>
-            <li id='instruction'> <%= instruction %> </li>
+            <li id='instruction'> <%= instruction.html_safe %> </li>
           <% end %>
         </ol>
       </div>

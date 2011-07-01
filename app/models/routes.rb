@@ -31,7 +31,7 @@ class Routes
 
   def steps
     first_route["steps"].collect do |step|
-      instruction = "[#{pluralize(step["distance"]["value"], "meter")}] [#{pluralize(step["duration"]["value"], "second")}] #{step["html_instructions"].html_safe}"
+      instruction = "[#{pluralize(step["distance"]["value"], "meter")}] [#{pluralize(step["duration"]["value"], "second")}] #{step["html_instructions"]}"
     end
   end
 
