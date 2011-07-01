@@ -30,6 +30,10 @@ Then /^the drive instructions should be displayed$/ do
   page.should have_selector("div#steps>ol>li#instruction")
 end
 
+Then /^error messages should be displayed$/ do
+  page.should have_selector("div#error_explanation")
+end
+
 Then /^an appriprate message should be displayed$/ do
   page.should have_content("Invalid addresses, please try again.")
 end

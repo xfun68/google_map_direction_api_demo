@@ -1,6 +1,20 @@
-<h1>Have fun</h1>
+<h1>Feel Lucky? Just Have a Try.</h1>
 
 <%= form_for(:map, :url => "/", :html => { :method => 'get' }) do |f| %>
+
+  <% if  @query && @query.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@query.errors.count, "error") %>
+        prohibited this query from being executed:</h3>
+      <p>There were problems with the following fields:</p>
+      <ul>
+        <% @query.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :start_address, "Start Address" %><br />
     <%= f.text_field :start_address %>
@@ -14,23 +28,25 @@
   </div>
 <% end %>
 
-<% if @has_search_result %>
-  <hr />
-  <div id="search_result">
-    <h1>Search Result</h1>
-    <p>From-To: <span id='start_address'><%= get_start_address_from_result %></span> ===> <span id='end_address'><%= get_end_address_from_result %></span></p>
-    <p id='distance'>Distance: <%= get_distance_from_result %></p>
-    <p id='duration'>Duration: <%= get_duration_from_result %></p>
-    <p>Steps:</p>
-	<div id='steps'>
-	  <ol>
-	 	<% get_steps_from_result.each do |step| %>
-	   	  <li id='instruction'> <%= make_instruction_from(step).html_safe %> </li>
-		<% end %>
-	  </ol>
+<% if @query && @query.valid? %>
+  <% if @has_search_result %>
+    <hr />
+    <div id="search_result">
+      <h1>Search Result</h1>
+      <p>From-To: <span id='start_address'><%= get_start_address_from_result %></span> ===> <span id='end_address'><%= get_end_address_from_result %></span></p>
+      <p id='distance'>Distance: <%= get_distance_from_result %></p>
+      <p id='duration'>Duration: <%= get_duration_from_result %></p>
+      <p>Steps:</p>
+      <div id='steps'>
+        <ol>
+          <% get_steps_from_result.each do |step| %>
+            <li id='instruction'> <%= make_instruction_from(step).html_safe %> </li>
+          <% end %>
+        </ol>
+      </div>
     </div>
-  </div>
-<% elsif !params[:map].nil? %>
-  <p>Invalid addresses, please try again.</p>
-  <hr />
+  <% elsif !params[:map].nil? %>
+    <p>Invalid addresses, please try again.</p>
+    <hr />
+  <% end %>
 <% end %>
