@@ -29,23 +29,23 @@
 <% end %>
 
 <% if @query && @query.valid? %>
-  <% if @has_search_result %>
+  <% if @routes.founded? %>
     <hr />
     <div id="search_result">
       <h1>Search Result</h1>
-      <p>From-To: <span id='start_address'><%= get_start_address_from_result %></span> ===> <span id='end_address'><%= get_end_address_from_result %></span></p>
-      <p id='distance'>Distance: <%= get_distance_from_result %></p>
-      <p id='duration'>Duration: <%= get_duration_from_result %></p>
+      <p>From-To: <span id='start_address'><%= @routes.detailed_start_address %></span> ===> <span id='end_address'><%= @routes.detailed_end_address %></span></p>
+      <p id='distance'>Distance: <%= @routes.distance %></p>
+      <p id='duration'>Duration: <%= @routes.duration %></p>
       <p>Steps:</p>
       <div id='steps'>
         <ol>
-          <% get_steps_from_result.each do |step| %>
-            <li id='instruction'> <%= make_instruction_from(step).html_safe %> </li>
+          <% @routes.steps.each do |instruction| %>
+            <li id='instruction'> <%= instruction %> </li>
           <% end %>
         </ol>
       </div>
     </div>
-  <% elsif !params[:map].nil? %>
+  <% else %>
     <p>Invalid addresses, please try again.</p>
     <hr />
   <% end %>
